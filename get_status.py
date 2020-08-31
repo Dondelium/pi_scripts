@@ -51,5 +51,4 @@ data = {
   "temps" : get_temps()
 }
 
-import json
-print(json.dumps(data, indent=2))
+res = requests.post('http://home.osf/api/stats/send', data);
