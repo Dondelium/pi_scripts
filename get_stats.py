@@ -41,7 +41,7 @@ def get_cpus():
 #---------------------------------------------
 def get_temps():
   temp = check_output(["/opt/vc/bin/vcgencmd", "measure_temp"])
-  temp = temp.decode("utf-8").replace("\\n","")
+  temp = temp.decode("utf-8").replace("\n","")
   return temp.split("=")[1]
 
 #---------------------------------------------
@@ -51,4 +51,4 @@ data = {
   "temps" : get_temps()
 }
 
-res = requests.post('http://home.osf/api/stats/send', data);
+res = requests.post('http://home.osf/api/stats/send', json = data);
