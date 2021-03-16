@@ -9,7 +9,7 @@ LOG_DIR="/var/log/$APP_NAME"
 LOG_FILE="$LOG_DIR/log.log"
 NODE_EXEC="/usr/local/lib/nodejs/bin/node"
 
-USAGE="Usage: $0 {start|stop|restart|status}"
+USAGE="Usage: $0 {start|stop|restart|status|cron}"
 
 start_app() {
     mkdir -p "$LOG_DIR"
@@ -24,28 +24,36 @@ start_app() {
 
 stop_app() {
     echo "Stopping $APP_NAME..."
-    ps aux | grep node | while read -r line
+    ps aux | grep "[n]ode" | while read -r line
     do
-        if [ "$line" != *"grep"* ]
-        then
-            arr=($line)
-            echo "Killing pid ${arr[1]}"
-            kill ${arr[1]}
-        fi
+        arr=($line)
+        echo "Killing pid ${arr[1]}"
+        kill ${arr[1]}
     done
     echo "$APP_NAME stopped."
 }
 
 status_app() {
     echo "Current list of running $APP_NAME instances:"
-    ps aux | grep node | while read -r line
+    ps aux | grep "[n]ode" | while read -r line
     do
-        if [ "$line" != *"grep"* ]
-        then
-            arr=($line)
-            echo "pid: ${arr[1]} %CPU: ${arr[2]} %MEM: ${arr[3]}"
-        fi
+        arr=($line)
+        echo "pid: ${arr[1]} %CPU: ${arr[2]} %MEM: ${arr[3]}"
     done
+}
+
+reboot_check() {
+    ps aux | grep "[n]ode" | while read -r line
+    do
+        echo "$(date) $APP_NAME detected. Exiting..."
+        exit 1
+    done
+    if [[ $? -eq 1 ]]; then
+        exit 0
+    fi
+    mv ${LOG_FILE} "${LOG_FILE}_$(date +"%Y-%m-%d_%T")"
+    echo "$(date) $APP_NAME not running... attempting restart"
+    start_app
 }
 
 case "$1" in
@@ -64,6 +72,10 @@ case "$1" in
     
     status)
         status_app
+    ;;
+    
+    cron)
+        reboot_check
     ;;
     
     *)
