@@ -51,4 +51,4 @@ data = {
   "temps" : get_temps()
 }
 
-res = requests.post('http://home.osf/api/stats/send', json = data);
+res = requests.post('http://server.osf/api/stats/send', json = data);
