@@ -47,7 +47,7 @@ monitor.get_mem = function(callback){
 monitor.send_data = function(payload){
   payload = JSON.stringify(payload);
   var options = {
-    hostname: '192.168.68.201',
+    hostname: 'server.osf',
     path: '/api/stats/send',
     method: 'POST',
     headers: {
