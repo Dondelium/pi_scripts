@@ -1,0 +1,13 @@
+[Unit]
+Description=Monitoring status client service.
+Documentation=https://example.com
+After=network.target
+
+[Service]
+Type=simple
+User=dondelium
+ExecStart=/usr/bin/node /home/dondelium/Documents/GitHub/pi_scripts/monitor.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

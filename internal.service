@@ -1,0 +1,16 @@
+[Unit]
+Description=Web Application server service.
+Documentation=https://example.com
+After=network.target
+
+[Service]
+EnvironmentFile=/home/dondelium/Documents/GitHub/internal_server/.env
+Type=simple
+User=dondelium
+StandardOutput=file:/home/dondelium/logs/internal.log
+StandardError=file:/home/dondelium/logs/internal.log
+ExecStart=/usr/bin/node /home/dondelium/Documents/GitHub/internal_server/server.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
