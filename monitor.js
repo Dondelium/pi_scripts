@@ -98,4 +98,4 @@ monitor.stop_monitor = function(){
 //---------------------------------------
 //---------------------------------------
 module.exports = monitor;
-monitor.start_monitor(60);
+monitor.start_monitor(300);
