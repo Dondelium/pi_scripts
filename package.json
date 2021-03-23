@@ -1,0 +1,23 @@
+{
+  "name": "pi_scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "monitor.js",
+  "dependencies": {
+    "systeminformation": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "exit 0;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dondelium/pi_scripts.git"
+  },
+  "author": "Dondelium",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dondelium/pi_scripts/issues"
+  },
+  "homepage": "https://github.com/Dondelium/pi_scripts#readme"
+}
